@@ -44,13 +44,18 @@ Windows 下 vinext 1.0.0-beta.5 的构建完成阶段会立即调用 `process.ex
 - GitHub：[yanwei1983/polardog_studio_site](https://github.com/yanwei1983/polardog_studio_site)
 - Pages 项目：`polardog-studio-site`
 - Pages 地址：[polardog-studio-site.pages.dev](https://polardog-studio-site.pages.dev)
-- 正式域名：`polardog.cc`（需完成 Cloudflare DNS 与域名验证）
+- 正式域名：[polardog.cc](https://polardog.cc/)；英文版：[polardog.cc/en/](https://polardog.cc/en/)
+- 主域名 DNS：代理的 `CNAME @ → polardog-studio-site.pages.dev`，TTL 为自动
 
-Pages 已连接 GitHub，`main` 为生产分支。推送后自动执行
+Pages 使用 GitHub 仓库的 `main` 作为生产分支，构建命令为
 `pnpm install --frozen-lockfile && pnpm build`，输出目录为 `dist/client`。
 构建环境设置 `NODE_VERSION=22.16.0`、`PNPM_VERSION=11.19.0`、
 `SKIP_DEPENDENCY_INSTALL=1`，使用项目指定的 pnpm 完成依赖安装。
 本机的共享 pnpm 存储由机器配置管理。
+
+推送后自动部署需要在 GitHub 的 **Cloudflare Workers and Pages** 应用中授权
+`yanwei1983/polardog_studio_site`，并在 Pages 中启用生产分支自动部署。
+如项目显示 Git 帐户连接已断开，应先检查该应用的仓库授权范围。
 
 需要手动发布已验证的静态产物时，在项目根目录执行：
 
