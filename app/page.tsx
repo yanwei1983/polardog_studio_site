@@ -1,5 +1,5 @@
-import { StudioSite } from '@/components/studio-site';
+import { LanguageRedirect } from '@/components/language-redirect';
 
 export default function Home() {
-  return <StudioSite locale="zh" />;
+  return <LanguageRedirect />;
 }

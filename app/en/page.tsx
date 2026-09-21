@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     'PolarDog Studio creates original science-fiction games and lasting online worlds. Discover The Second Epoch, our studio, and opportunities to join us.',
   alternates: {
     canonical: '/en/',
-    languages: { 'zh-CN': '/', en: '/en/', 'x-default': '/' },
+    languages: { 'zh-CN': '/cn/', en: '/en/', 'x-default': '/' },
   },
   openGraph: {
     type: 'website',

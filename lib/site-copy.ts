@@ -1,6 +1,9 @@
 export type Locale = 'zh' | 'en';
 
-export const PRODUCT_URL = 'https://tse.polardog.cc/';
+export const PRODUCT_URLS: Record<Locale, string> = {
+  zh: 'https://tse.polardog.cc/cn/',
+  en: 'https://tse.polardog.cc/en/',
+};
 
 export const siteCopy = {
   zh: {

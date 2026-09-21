@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   ],
   alternates: {
     canonical: '/',
-    languages: { 'zh-CN': '/', en: '/en/', 'x-default': '/' },
+    languages: { 'zh-CN': '/cn/', en: '/en/', 'x-default': '/' },
   },
   openGraph: {
     type: 'website',

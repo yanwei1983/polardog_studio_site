@@ -23,7 +23,8 @@ pnpm build
 
 - 中文与英文文案：`lib/site-copy.ts`
 - 页面组件与语言切换：`components/studio-site.tsx`
-- 中文路由：`app/page.tsx`；英文路由：`app/en/page.tsx`
+- 默认语言入口：`app/page.tsx`；中文路由：`app/cn/page.tsx`；英文路由：`app/en/page.tsx`
+- 默认语言判断与路径：`lib/site-language.ts`、`components/language-redirect.tsx`
 - 拖动、指针与滚动视差：`lib/use-studio-motion.ts`
 - 全局视觉与响应式样式：`app/globals.css`
 - 页面元数据：`app/layout.tsx`
@@ -31,7 +32,9 @@ pnpm build
 - 公司 Logo 与网站图标：`public/brand/`、`public/favicon.ico`
 - 品牌素材来源与首图生成记录：[docs/brand-assets.md](docs/brand-assets.md)
 
-右上角语言切换保留当前章节，并在浏览器允许时记住所选语言。默认访问 `/`，英文版本位于 `/en/`。产品入口统一配置为 `https://tse.polardog.cc/`。
+默认入口 `/` 优先使用已保存的语言选择，否则根据浏览器首选语言跳转：中文（含 `zh-CN`、`zh-TW`、`zh-HK`）使用 `/cn/`，其他语言使用 `/en/`。明确访问 `/cn/` 或 `/en/` 时始终显示对应语言，并记住该选择；禁用浏览器存储时仍可正常切换。右上角语言切换保留当前章节和查询参数。
+
+产品图片和按钮按当前语言跳转：中文使用 `https://tse.polardog.cc/cn/`，英文使用 `https://tse.polardog.cc/en/`。游戏官网使用相同的默认语言与固定语言路径规则。
 
 ## 构建说明
 
@@ -44,7 +47,7 @@ Windows 下 vinext 1.0.0-beta.5 的构建完成阶段会立即调用 `process.ex
 - GitHub：[yanwei1983/polardog_studio_site](https://github.com/yanwei1983/polardog_studio_site)
 - Pages 项目：`polardog-studio-site`
 - Pages 地址：[polardog-studio-site.pages.dev](https://polardog-studio-site.pages.dev)
-- 正式域名：[polardog.cc](https://polardog.cc/)；英文版：[polardog.cc/en/](https://polardog.cc/en/)
+- 正式域名：[polardog.cc](https://polardog.cc/)；中文版：[polardog.cc/cn/](https://polardog.cc/cn/)；英文版：[polardog.cc/en/](https://polardog.cc/en/)
 - 主域名 DNS：代理的 `CNAME @ → polardog-studio-site.pages.dev`，TTL 为自动
 
 Pages 使用 GitHub 仓库的 `main` 作为生产分支，构建命令为

@@ -14,11 +14,11 @@ import {
   MoveHorizontal,
   X,
 } from 'lucide-react';
-import { PRODUCT_URL, siteCopy, type Locale } from '@/lib/site-copy';
+import { PRODUCT_URLS, siteCopy, type Locale } from '@/lib/site-copy';
+import { languagePaths, languageStorageKey } from '@/lib/site-language';
 import { useStudioMotion } from '@/lib/use-studio-motion';
 
 const anchors = ['works', 'about', 'values', 'join', 'contact'];
-const languageStorageKey = 'polardog-language';
 
 export function StudioSite({ locale }: { locale: Locale }) {
   const copy = siteCopy[locale];
@@ -30,18 +30,9 @@ export function StudioSite({ locale }: { locale: Locale }) {
 
   useEffect(() => {
     document.documentElement.lang = locale === 'zh' ? 'zh-CN' : 'en';
-    // Only the default entry follows a saved preference. /en/ is always English.
+    // Explicit language paths always win over a saved or browser preference.
     try {
-      const navigation = performance.getEntriesByType('navigation')[0] as
-        | PerformanceNavigationTiming
-        | undefined;
-      if (
-        locale === 'zh' &&
-        localStorage.getItem(languageStorageKey) === 'en' &&
-        navigation?.type !== 'back_forward'
-      ) {
-        window.location.replace(`/en/${window.location.hash}`);
-      }
+      localStorage.setItem(languageStorageKey, locale);
     } catch {
       // Navigation and switching still work when browser storage is unavailable.
     }
@@ -70,7 +61,7 @@ export function StudioSite({ locale }: { locale: Locale }) {
     } catch {
       // A private browser may disable persistent storage.
     }
-    event.currentTarget.href = `${nextLocale === 'en' ? '/en/' : '/'}${window.location.hash}`;
+    event.currentTarget.href = `${languagePaths[nextLocale]}${window.location.search}${window.location.hash}`;
   }
 
   return (
@@ -108,7 +99,7 @@ export function StudioSite({ locale }: { locale: Locale }) {
         <div className="nav-actions">
           <nav className="language-switch" aria-label={copy.language}>
             <a
-              href="/"
+              href={languagePaths.zh}
               lang="zh-CN"
               hrefLang="zh-CN"
               aria-current={locale === 'zh' ? 'page' : undefined}
@@ -118,7 +109,7 @@ export function StudioSite({ locale }: { locale: Locale }) {
             </a>
             <span aria-hidden="true">/</span>
             <a
-              href="/en/"
+              href={languagePaths.en}
               lang="en"
               hrefLang="en"
               aria-current={locale === 'en' ? 'page' : undefined}
@@ -232,7 +223,7 @@ export function StudioSite({ locale }: { locale: Locale }) {
           <article className="product-feature">
             <a
               className="product-art"
-              href={PRODUCT_URL}
+              href={PRODUCT_URLS[locale]}
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${copy.works.name} · ${copy.works.action}`}
@@ -274,7 +265,7 @@ export function StudioSite({ locale }: { locale: Locale }) {
                 <p>{copy.works.description}</p>
                 <a
                   className="text-link"
-                  href={PRODUCT_URL}
+                  href={PRODUCT_URLS[locale]}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
