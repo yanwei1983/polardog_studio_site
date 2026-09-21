@@ -30,12 +30,6 @@ export function StudioSite({ locale }: { locale: Locale }) {
 
   useEffect(() => {
     document.documentElement.lang = locale === 'zh' ? 'zh-CN' : 'en';
-    // Explicit language paths always win over a saved or browser preference.
-    try {
-      localStorage.setItem(languageStorageKey, locale);
-    } catch {
-      // Navigation and switching still work when browser storage is unavailable.
-    }
   }, [locale]);
 
   useEffect(() => {
