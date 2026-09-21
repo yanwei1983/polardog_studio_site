@@ -41,7 +41,24 @@ Windows 下 vinext 1.0.0-beta.5 的构建完成阶段会立即调用 `process.ex
 
 ## Cloudflare Pages
 
-构建命令：`pnpm build`；输出目录：`dist/client`；生产分支：`main`。安装时使用 `pnpm install --frozen-lockfile`，共享 pnpm 存储由机器配置管理。
+- GitHub：[yanwei1983/polardog_studio_site](https://github.com/yanwei1983/polardog_studio_site)
+- Pages 项目：`polardog-studio-site`
+- Pages 地址：[polardog-studio-site.pages.dev](https://polardog-studio-site.pages.dev)
+- 正式域名：`polardog.cc`（需完成 Cloudflare DNS 与域名验证）
+
+Pages 已连接 GitHub，`main` 为生产分支。推送后自动执行
+`pnpm install --frozen-lockfile && pnpm build`，输出目录为 `dist/client`。
+构建环境设置 `NODE_VERSION=22.16.0`、`PNPM_VERSION=11.19.0`、
+`SKIP_DEPENDENCY_INSTALL=1`，使用项目指定的 pnpm 完成依赖安装。
+本机的共享 pnpm 存储由机器配置管理。
+
+需要手动发布已验证的静态产物时，在项目根目录执行：
+
+```bash
+pnpm exec wrangler pages deploy dist/client --project-name polardog-studio-site --branch main
+```
+
+Cloudflare 的项目与 DNS 凭据由本机登录或平台授权管理，不写入仓库。
 
 页面的公司介绍、招聘方向与联系邮箱属于当前官网文案；正式发布前应核对商务与招聘邮箱。
 
