@@ -28,6 +28,8 @@ pnpm build
 - 全局视觉与响应式样式：`app/globals.css`
 - 页面元数据：`app/layout.tsx`
 - 网站主视觉：`public/images/`
+- 公司 Logo 与网站图标：`public/brand/`、`public/favicon.ico`
+- 品牌素材来源与首图生成记录：[docs/brand-assets.md](docs/brand-assets.md)
 
 右上角语言切换保留当前章节，并在浏览器允许时记住所选语言。默认访问 `/`，英文版本位于 `/en/`。产品入口统一配置为 `https://tse.polardog.cc/`。
 

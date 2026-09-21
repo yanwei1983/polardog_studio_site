@@ -90,12 +90,13 @@ export function StudioSite({ locale }: { locale: Locale }) {
           aria-label={copy.home}
           onClick={() => setMenuOpen(false)}
         >
-          <span className="brand-mark" aria-hidden="true">
-            <span />
-          </span>
-          <span>
-            POLARDOG<span className="brand-studio">STUDIO</span>
-          </span>
+          <img
+            className="brand-logo"
+            src="/brand/polardog-horizontal.png"
+            width="768"
+            height="256"
+            alt="polardog STUDIO"
+          />
         </a>
         <nav className="desktop-nav" aria-label={copy.navigation}>
           {anchors.map((anchor, index) => (
@@ -161,20 +162,14 @@ export function StudioSite({ locale }: { locale: Locale }) {
       <main id="main">
         <section className="hero" id="top" aria-labelledby="hero-title">
           <div className="hero-media" aria-hidden="true">
-            <picture>
-              <source
-                media="(max-width: 700px)"
-                srcSet="/images/second-epoch-hero-mobile.webp"
-              />
-              <img
-                src="/images/second-epoch-hero.webp"
-                alt=""
-                width="1916"
-                height="821"
-                fetchPriority="high"
-                draggable="false"
-              />
-            </picture>
+            <img
+              src="/images/polardog-studio-hero.webp"
+              alt=""
+              width="1672"
+              height="941"
+              fetchPriority="high"
+              draggable="false"
+            />
           </div>
           <div className="hero-shade" aria-hidden="true" />
           <div className="hero-content">
@@ -192,16 +187,13 @@ export function StudioSite({ locale }: { locale: Locale }) {
               <br />
               {copy.hero.descriptionNext}
             </p>
-            <a className="button button-light" href="#works">
+            <a className="button button-light" href="#about">
               {copy.hero.action}
               <ArrowDown size={18} aria-hidden="true" />
             </a>
           </div>
           <div className="hero-coordinate" aria-hidden="true">
-            <i />
-            POLARDOG
-            <br />
-            <span>BEYOND THE KNOWN</span>
+            <span>{copy.hero.signature}</span>
           </div>
           <div className="hero-bottom">
             <a className="scroll-cue" href="#works">
@@ -212,15 +204,10 @@ export function StudioSite({ locale }: { locale: Locale }) {
               <MoveHorizontal size={18} aria-hidden="true" />
               {copy.hero.drag}
             </p>
-            <a
-              className="hero-project"
-              href={PRODUCT_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a className="hero-studio" href="#values">
               <span>
-                {copy.hero.featured}
-                <strong>{copy.hero.project}</strong>
+                {copy.hero.studioLabel}
+                <strong>{copy.hero.studioLink}</strong>
               </span>
               <ArrowUpRight size={22} aria-hidden="true" />
             </a>
@@ -333,7 +320,13 @@ export function StudioSite({ locale }: { locale: Locale }) {
             ))}
           </div>
           <div className="about-wordmark" aria-hidden="true">
-            POLARDOG
+            <img
+              src="/brand/polardog-horizontal.png"
+              width="768"
+              height="256"
+              alt=""
+              loading="lazy"
+            />
           </div>
         </section>
 
@@ -443,7 +436,14 @@ export function StudioSite({ locale }: { locale: Locale }) {
           </div>
           <footer className="footer">
             <a className="footer-brand" href="#top" aria-label={copy.home}>
-              POLARDOG<span>STUDIO</span>
+              <img
+                className="brand-logo"
+                src="/brand/polardog-horizontal.png"
+                width="768"
+                height="256"
+                alt="polardog STUDIO"
+                loading="lazy"
+              />
             </a>
             <p>© 2026 PolarDog Studio. {copy.contact.rights}</p>
             <a className="back-top" href="#top">

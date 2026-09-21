@@ -18,6 +18,18 @@ export const metadata: Metadata = {
   description:
     'PolarDog Studio 专注于原创科幻游戏与长期在线世界的研发，代表作品《The Second Epoch / 第二纪元》。',
   applicationName: 'PolarDog Studio',
+  icons: {
+    icon: [
+      { url: '/brand/favicon-32.png', type: 'image/png', sizes: '32x32' },
+      { url: '/brand/favicon-16.png', type: 'image/png', sizes: '16x16' },
+    ],
+    shortcut: '/favicon.ico',
+    apple: {
+      url: '/brand/apple-touch-icon.png',
+      sizes: '180x180',
+      type: 'image/png',
+    },
+  },
   keywords: [
     'PolarDog',
     'PolarDog Studio',
