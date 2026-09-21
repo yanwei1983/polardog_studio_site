@@ -2,13 +2,14 @@
   "name": "sites-project",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@11.19.0",
   "engines": {
     "node": ">=22.13.0"
   },
   "scripts": {
     "dev": "vinext dev",
-    "build": "vinext build",
-    "start": "wrangler dev --config dist/server/wrangler.json",
+    "build": "vinext build && node scripts/verify-export.mjs",
+    "start": "vite preview --config vite.preview.config.ts --port 3002",
     "lint": "oxlint",
     "format": "oxfmt"
   },

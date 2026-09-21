@@ -18,20 +18,31 @@ export const metadata: Metadata = {
   description:
     'PolarDog Studio 专注于原创科幻游戏与长期在线世界的研发，代表作品《The Second Epoch / 第二纪元》。',
   applicationName: 'PolarDog Studio',
-  keywords: ['PolarDog', 'PolarDog Studio', '第二纪元', 'The Second Epoch', '游戏研发'],
+  keywords: [
+    'PolarDog',
+    'PolarDog Studio',
+    '第二纪元',
+    'The Second Epoch',
+    '游戏研发',
+  ],
   alternates: {
     canonical: '/',
+    languages: { 'zh-CN': '/', en: '/en/', 'x-default': '/' },
   },
   openGraph: {
     type: 'website',
     locale: 'zh_CN',
+    alternateLocale: 'en_US',
     url: 'https://polardog.cc',
     siteName: 'PolarDog Studio',
     title: 'PolarDog Studio｜原创游戏研发团队',
     description: '创造值得长期生活其中的游戏世界。',
+    images: [
+      { url: '/images/second-epoch-hero.webp', width: 1916, height: 821 },
+    ],
   },
   twitter: {
-    card: 'summary',
+    card: 'summary_large_image',
     title: 'PolarDog Studio｜原创游戏研发团队',
     description: '创造值得长期生活其中的游戏世界。',
   },

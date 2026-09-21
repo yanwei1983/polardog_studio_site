@@ -42,7 +42,11 @@ export default defineConfig(async ({ command }) => {
   process.env.MINIFLARE_REGISTRY_PATH ??= '.wrangler/registry';
 
   // Wrangler snapshots its log path while the Cloudflare plugin is imported.
-  const { cloudflare } = await import('@cloudflare/vite-plugin');
+  // Static builds must not start the Workers/Miniflare runtime.
+  const cloudflare =
+    command === 'serve'
+      ? (await import('@cloudflare/vite-plugin')).cloudflare
+      : undefined;
 
   return {
     css: { postcss: { plugins: [tailwindcss()] } },
@@ -54,7 +58,7 @@ export default defineConfig(async ({ command }) => {
         ? [
             vinext(),
             sites(),
-            cloudflare({
+            cloudflare!({
               viteEnvironment: { name: 'rsc', childEnvironments: ['ssr'] },
               config: localBindingConfig,
             }),

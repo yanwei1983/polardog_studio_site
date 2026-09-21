@@ -1,0 +1,37 @@
+diff --git a/dist/cli.js b/dist/cli.js
+--- a/dist/cli.js
++++ b/dist/cli.js
+@@ -408,7 +408,10 @@
+ 		prerenderResult: prerenderResult ?? void 0
+ 	});
+ 	console.log("\n  Build complete. Run `vinext start` to start the production server.\n");
+-	process.exit(0);
++	// Windows needs the native build workers to finish closing their uv handles.
++	// Keep all failure exits intact; only let successful builds drain naturally.
++	if (process.platform === "win32") process.exitCode = 0;
++	else process.exit(0);
+ }
+ async function start() {
+ 	const parsed = parseArgs(rawArgs);
+diff --git a/dist/build/prerender.js b/dist/build/prerender.js
+--- a/dist/build/prerender.js
++++ b/dist/build/prerender.js
+@@ -755,7 +755,8 @@
+ 				const htmlHeaders = new Headers();
+ 				if (prerenderRouteParamsHeader !== null) htmlHeaders.set(VINEXT_PRERENDER_ROUTE_PARAMS_HEADER, prerenderRouteParamsHeader);
+ 				if (isSpeculative) htmlHeaders.set(VINEXT_PRERENDER_SPECULATIVE_HEADER, "1");
+-				const htmlRequest = new Request(`http://localhost${urlPath}`, { headers: htmlHeaders });
++				const renderPath = config.trailingSlash && !urlPath.endsWith("/") ? `${urlPath}/` : urlPath;
++				const htmlRequest = new Request(`http://localhost${renderPath}`, { headers: htmlHeaders });
+ 				const htmlRender = await runWithHeadersContext(headersContextFromRequest(htmlRequest), async () => {
+ 					const response = await rscHandler(htmlRequest);
+ 					const cacheControl = response.headers.get("cache-control") ?? "";
+@@ -815,7 +816,7 @@
+ 					});
+ 					if (prerenderRouteParamsHeader !== null) rscHeaders.set(VINEXT_PRERENDER_ROUTE_PARAMS_HEADER, prerenderRouteParamsHeader);
+ 					if (isSpeculative) rscHeaders.set(VINEXT_PRERENDER_SPECULATIVE_HEADER, "1");
+-					const rscRequest = new Request(`http://localhost${urlPath}`, { headers: rscHeaders });
++					const rscRequest = new Request(`http://localhost${renderPath}`, { headers: rscHeaders });
+ 					const rscRes = await runWithHeadersContext(headersContextFromRequest(rscRequest), () => rscHandler(rscRequest));
+ 					if (!rscRes.ok) {
+ 						await rscRes.body?.cancel();
